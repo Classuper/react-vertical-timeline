@@ -7,3 +7,4 @@ coverage/
 npm-debug.log
 .eslintcache
 style.min.css
+*.sublime-*
