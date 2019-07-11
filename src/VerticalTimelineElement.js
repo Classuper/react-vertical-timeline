@@ -39,11 +39,16 @@ class VerticalTimelineElement extends Component {
     return (
       <div
         id={id}
-        className={classNames(className, classes.root, 'vertical-timeline-element', {
-          'vertical-timeline-element--left': position === 'left',
-          'vertical-timeline-element--right': position === 'right',
-          'vertical-timeline-element--no-children': children === '',
-        })}
+        className={classNames(
+          className,
+          classes.root,
+          'vertical-timeline-element',
+          {
+            'vertical-timeline-element--left': position === 'left',
+            'vertical-timeline-element--right': position === 'right',
+            'vertical-timeline-element--no-children': children === '',
+          },
+        )}
         style={style}
       >
         <VisibilitySensor
@@ -55,23 +60,34 @@ class VerticalTimelineElement extends Component {
             <span // eslint-disable-line jsx-a11y/no-static-element-interactions
               style={iconStyle}
               onClick={iconOnClick}
-              className={classNames(classes.icon, 'vertical-timeline-element-icon', {
-                'bounce-in': visible,
-                'is-hidden': !visible
-              })}
+              className={classNames(
+                classes.icon,
+                'vertical-timeline-element-icon',
+                {
+                  'bounce-in': visible,
+                  'is-hidden': !visible,
+                },
+              )}
             >
               {icon}
             </span>
             <div
               style={dateStyle}
-              className={classNames(classes.date, 'vertical-timeline-element-content', {
-                'bounce-in': visible,
-                'is-hidden': !visible
-              })}
+              className={classNames(
+                classes.date,
+                'vertical-timeline-element-content',
+                {
+                  'bounce-in': visible,
+                  'is-hidden': !visible,
+                },
+              )}
             >
               {children}
               <span
-                className={classNames(classes.dateText, 'vertical-timeline-element-date')}
+                className={classNames(
+                  classes.dateText,
+                  'vertical-timeline-element-date',
+                )}
               >
                 {date}
               </span>
