@@ -20,10 +20,14 @@ class VerticalTimelineElement extends Component {
     const {
       id,
       children,
+      classes = {},
+      before,
+      after,
       icon,
       iconStyle,
       iconOnClick,
       date,
+      dateStyle,
       position,
       style,
       className,
@@ -35,7 +39,7 @@ class VerticalTimelineElement extends Component {
     return (
       <div
         id={id}
-        className={classNames(className, 'vertical-timeline-element', {
+        className={classNames(className || classes.root, 'vertical-timeline-element', {
           'vertical-timeline-element--left': position === 'left',
           'vertical-timeline-element--right': position === 'right',
           'vertical-timeline-element--no-children': children === '',
@@ -47,23 +51,32 @@ class VerticalTimelineElement extends Component {
           onChange={this.onVisibilitySensorChange}
         >
           <div>
+            {before}
             <span // eslint-disable-line jsx-a11y/no-static-element-interactions
               style={iconStyle}
               onClick={iconOnClick}
-              className={`vertical-timeline-element-icon ${
-                visible ? 'bounce-in' : 'is-hidden'
-              }`}
+              className={classNames(classes.icon, 'vertical-timeline-element-icon', {
+                'bounce-in': visible,
+                'is-hidden': !visible
+              })}
             >
               {icon}
             </span>
             <div
-              className={`vertical-timeline-element-content ${
-                visible ? 'bounce-in' : 'is-hidden'
-              }`}
+              style={dateStyle}
+              className={classNames('vertical-timeline-element-content', {
+                'bounce-in': visible,
+                'is-hidden': !visible
+              })}
             >
               {children}
-              <span className="vertical-timeline-element-date">{date}</span>
+              <span
+                className={classNames(classes.date, 'vertical-timeline-element-date')}
+              >
+                {date}
+              </span>
             </div>
+            {after}
           </div>
         </VisibilitySensor>
       </div>
@@ -77,12 +90,16 @@ VerticalTimelineElement.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
+  before: PropTypes.node,
+  after: PropTypes.node,
+  classes: PropTypes.shape({}),
   className: PropTypes.string,
   icon: PropTypes.element,
   iconStyle: PropTypes.shape({}),
   iconOnClick: PropTypes.func,
   style: PropTypes.shape({}),
   date: PropTypes.node,
+  dateStyle: PropTypes.shape({}),
   position: PropTypes.string,
   visibilitySensorProps: PropTypes.shape({}),
 };
@@ -90,11 +107,15 @@ VerticalTimelineElement.propTypes = {
 VerticalTimelineElement.defaultProps = {
   id: '',
   children: '',
+  before: null,
+  after: null,
+  classes: null,
   className: '',
   icon: null,
   iconStyle: null,
   style: null,
   date: '',
+  dateStyle: null,
   position: '',
   iconOnClick: null,
   visibilitySensorProps: { partialVisibility: true, offset: { bottom: 80 } },
