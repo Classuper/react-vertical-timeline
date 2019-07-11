@@ -39,7 +39,7 @@ class VerticalTimelineElement extends Component {
     return (
       <div
         id={id}
-        className={classNames(className || classes.root, 'vertical-timeline-element', {
+        className={classNames(className, classes.root, 'vertical-timeline-element', {
           'vertical-timeline-element--left': position === 'left',
           'vertical-timeline-element--right': position === 'right',
           'vertical-timeline-element--no-children': children === '',
@@ -64,14 +64,14 @@ class VerticalTimelineElement extends Component {
             </span>
             <div
               style={dateStyle}
-              className={classNames('vertical-timeline-element-content', {
+              className={classNames(classes.date, 'vertical-timeline-element-content', {
                 'bounce-in': visible,
                 'is-hidden': !visible
               })}
             >
               {children}
               <span
-                className={classNames(classes.date, 'vertical-timeline-element-date')}
+                className={classNames(classes.dateText, 'vertical-timeline-element-date')}
               >
                 {date}
               </span>
@@ -109,7 +109,7 @@ VerticalTimelineElement.defaultProps = {
   children: '',
   before: null,
   after: null,
-  classes: null,
+  classes: undefined,
   className: '',
   icon: null,
   iconStyle: null,
